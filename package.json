@@ -1,0 +1,23 @@
+{
+  "name": "go-freelance",
+  "version": "1.0.0",
+  "description": "Freelancing website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snaki00/goFreelance.git"
+  },
+  "author": "Paweł Rusnak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snaki00/goFreelance/issues"
+  },
+  "homepage": "https://github.com/snaki00/goFreelance#readme",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3"
+  }
+}

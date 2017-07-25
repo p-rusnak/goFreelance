@@ -1,0 +1,26 @@
+header{
+    background-color: #e8e8e8;
+    border-radius: 5px;
+}
+
+.footer {
+    position: absolute;
+    bottom:0px;
+    width: 100%;
+    margin: 0;
+    background-color: #e8e8e8;
+    height: 50px;
+}
+
+button {
+    margin-top: 100px;
+    
+}
+
+button:focus {
+    outline: 0 !important;
+}
+
+nav {
+    position: fixed;
+}
