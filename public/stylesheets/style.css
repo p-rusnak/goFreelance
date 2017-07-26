@@ -1,10 +1,33 @@
 /*Need to split files*/
 
 /*Main page*/
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 
 body {
     background-color: #f2f2f2;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
 }
+
+a {
+    color: black;
+}
+
+.landing {
+    padding-bottom: 
+}
+
+a:hover, a:focus{
+    color: black;
+    text-decoration: none;
+}
+
 .container header {
     background-color: #962d9b;
     color: #fef4ff;
@@ -13,14 +36,17 @@ body {
 
 .footer {
     position: absolute;
-    bottom:0px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    padding: 1rem;
     width: 100%;
     margin: 0;
     background-color: #e8e8e8;
     height: 50px;
 }
 
-button {
+.btn-main{
     width: 20%;
     margin-top: 100px;
     margin-left: 20%;
@@ -56,16 +82,22 @@ nav {
     color: #962d9b;
 }
 
-#main {
+.landing {
+    
+    padding-bottom: 100px;
+}
+
+.main {
     border-radius: 5px;
     background-color: white;
     box-shadow: 7px 4px 30px -15px rgba(74,44,74,1);
-    padding-bottom: 100px;
     padding-left: 0;
     padding-right: 0;
+    margin-bottom: 10px;
 }
 
 /* Offers page */
+
 
 
 .postfield {
@@ -81,8 +113,9 @@ nav {
     width: 100%;
     margin: 0;
     padding: 0;
-    border: 1px solid #f2f2f2;
+    border: 2px solid #f2f2f2;
     background-color: #feeaff;
+    cursor: pointer;
 }
 
 .post:nth-child(2n) {
@@ -96,23 +129,128 @@ nav {
 #title {
     display: inline;
     margin-left: 25px;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 #price {
-    display: inline;
     float: right;
-    margin-right: 15px;
+    margin-right: 25px;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 #descr {
     line-height: 150%;
-    margin: 10px 100px;
+    margin: 5px 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #author {
     width: 100%;
     text-align: right;
     padding-right: 5px;
+    margin-bottom: 0;
+    margin-top: 0;
     
 }
 
+
+/* show page */
+
+
+.title {
+    background-color: lightgray;
+    padding-left: 25px;
+}
+
+.title h1 {
+    display: inline;
+}
+
+.empl {
+    display: inline;
+    float: right;
+    padding-top: 5px;
+    padding-right: 5px;
+}
+
+.descr {
+    margin: 10px 50px;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+textarea {
+    height: 10rem;
+    width: 100%
+}
+
+.context {
+    
+    display: inline;
+}
+
+.budget {
+    font-size: 30px;
+    float: right;
+}
+
+form {
+    padding-top: 10px;
+    padding-bottom: 40px;
+    width: 70%;
+    margin-left: 15%
+}
+
+.av-placeholder {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    margin-right: 20px;
+}
+
+.off-price {
+    display: inline;
+    float: right;
+}
+
+#price-form {
+    width: 10%;
+    float: right;
+}
+
+.submit {
+    display: inline;
+    float: right;
+}
+
+.comments {
+    list-style: none;
+    
+    width: 100%;
+    padding: 0;
+}
+
+.comment {
+    background-color: lightgray;
+    width: 100%;
+    
+    margin-bottom: 10px;
+}
+
+.author {
+    padding-left: 10px;
+}
+
+
+#date {
+    float: right;
+    padding-right: 10px;
+    padding-top: 5px;
+}

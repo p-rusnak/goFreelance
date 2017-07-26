@@ -1,10 +1,16 @@
 var mongoose = require("mongoose");
 
 var postSchema = new mongoose.Schema({
-    autor: String,
+    author: String,
     title: String,
     descr: String,
-    price: Number
+    price: Number,
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
 });
 
 

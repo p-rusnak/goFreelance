@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+
+
+<div class="container main">
+    <h1 class="title">Create new offer</h1>
+    
+    <form action="/offers" method="POST">
+        <input type="text" name="title" placeholder="Title">
+        <textarea type="text" name="descr" placeholder="Descritpion"></textarea>
+        <input type="number" min="0.01" name="price" placeholder="Price in PLN">
+        <button >Submit</button>
+    </form>
+</div>
+
+
+<% include ../partials/footer %>

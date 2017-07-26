@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+
+<div class="container offers main">
+    
+    <ul class = "postfield">
+        <% posts.forEach(function(post){ %>
+                <li class = "post" onclick="window.location.href='/offers/<%= post._id %>'">
+                     <div id="title"><strong><%= post.title %></strong></div>
+                     <div id="price"><%= post.price %> PLN </div>
+                     <div id="descr"> <%= post.descr %> </div>
+                     <div>
+                         <p id="author"> -<%= post.author %></p>
+                    </div>
+               </li>
+        <% }); %>
+    </ul>
+    
+</div>
+
+
+<% include ../partials/footer %>
