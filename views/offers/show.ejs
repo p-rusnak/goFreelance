@@ -42,7 +42,7 @@
     </ul>
     
     <form action="/offers/<%= post._id %>/comments" method="POST">
-        <textarea name="context"  placeholder="Comment..."></textarea>
+        <textarea name="context"  placeholder="Comment..." required></textarea>
         <button class="submit">Bid on this!</button>
         <input type="number" min="0.00" id="price-form" placeholder="price">
     </form>

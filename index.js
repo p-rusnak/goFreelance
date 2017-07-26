@@ -12,7 +12,7 @@ var Post    = require("./models/post"),
     seedDB  = require("./seeds");
     
     
-seedDB();
+//seedDB();
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/gf_db', {useMongoClient: true});
@@ -57,7 +57,7 @@ routes.get("/offers", function(req, res){
 
 routes.post("/offers", isLoggedIn, function(req, res){
     Post.create({
-        author: req.body.author,
+        author: req.user.username,
         title: req.body.title,
         descr: req.body.descr,
         price: req.body.price

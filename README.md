@@ -4,7 +4,7 @@ Simple website like freelance.com with offers from scratch
 # what to do
 - account types
 - user pages
-- 
+
 # style all the pages!!!
 
 # already done
