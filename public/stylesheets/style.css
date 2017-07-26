@@ -1,6 +1,14 @@
-header{
-    background-color: #e8e8e8;
-    border-radius: 5px;
+/*Need to split files*/
+
+/*Main page*/
+
+body {
+    background-color: #f2f2f2;
+}
+.container header {
+    background-color: #962d9b;
+    color: #fef4ff;
+    width: 100%;
 }
 
 .footer {
@@ -13,14 +21,98 @@ header{
 }
 
 button {
+    width: 20%;
     margin-top: 100px;
-    
+    margin-left: 20%;
+    color: white;
+    background-color: #962d9b;
+    height: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background-color: #6f2172;
+    color: white !important;
 }
 
 button:focus {
     outline: 0 !important;
+    color: white !important;
+    box-shadow: inset 0px 0px 105px -2px rgba(242,242,242,0.48);
+}
+
+@media (max-width: 767px) { 
+    button    {
+            display: block;
+            width: 70%;
+            height: 100px;
+            
+    }
 }
 
 nav {
     position: fixed;
+    color: #962d9b;
 }
+
+#main {
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 7px 4px 30px -15px rgba(74,44,74,1);
+    padding-bottom: 100px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Offers page */
+
+
+.postfield {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.post {
+    background: pink;
+    line-height: 50px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #f2f2f2;
+    background-color: #feeaff;
+}
+
+.post:nth-child(2n) {
+    background-color: #fef4ff;
+}
+
+.post:hover {
+    background-color: #f3def4;
+}
+
+#title {
+    display: inline;
+    margin-left: 25px;
+}
+
+#price {
+    display: inline;
+    float: right;
+    margin-right: 15px;
+}
+
+#descr {
+    line-height: 150%;
+    margin: 10px 100px;
+}
+
+#author {
+    width: 100%;
+    text-align: right;
+    padding-right: 5px;
+    
+}
+

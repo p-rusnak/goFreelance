@@ -4,18 +4,16 @@ Simple website like freelance.com with offers from scratch
 # what to do
 = basic functionality
 
-- database
 - auth
 - account types
 
 - comments/responds
-- pricng
 
 # styling
 
 . landing page
 
-. offers page
+. offers page 
 
 . offer pages
 
@@ -29,4 +27,6 @@ later
 
 
 # already done
-very basic styling and routing, main setup
+- very basic styling and routing, main setup
+
+- offers get route styled, acces to DB, more styling

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/snaki00/goFreelance#readme",
   "dependencies": {
     "ejs": "^2.5.6",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "mongoose": "^4.11.4"
   }
 }

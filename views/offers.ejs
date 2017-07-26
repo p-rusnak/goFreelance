@@ -1,0 +1,23 @@
+<% include partials/header %>
+
+<div class="container" id="main">
+    
+    <ul class = "postfield">
+        <% posts.forEach(function(post){ %>
+        
+            <li class = "post"> 
+                 <div id="title"><strong><%= post.title %></strong></div>
+                 <div id="price"><%= post.price %> PLN </div>
+                 <div id="descr"> <%= post.descr %> </div>
+                 <div>
+                     <p id="author"> -<%= post.autor %></p>
+                </div>
+            </li>
+        
+        <% }); %>
+    </ul>
+    
+</div>
+
+
+<% include partials/footer %>
