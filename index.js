@@ -38,8 +38,6 @@ routes.use(function(req, res, next){
 });
 
 
-
-
 routes.get("/", function(req, res){
    res.render("home"); 
 });
@@ -47,10 +45,21 @@ routes.get("/", function(req, res){
 
 routes.get("/offers", function(req, res){
     Post.find({}, function(err, item){
+        var items = new Array;
         if(err){
             console.log("error");
         } else {
-            res.render("offers/offers", {posts: item});
+             if(req.query.s){
+                item.forEach(function(post){
+                   if (search(post, req.query.s)){
+                       items.push(post);
+                   }
+                 });
+                 
+                res.render("offers/offers", {posts: items});
+            }  else {
+            res.render("offers/offers", {posts: item})
+            }
         }
     });
 });
@@ -166,4 +175,20 @@ function isLoggedIn(req, res, next){
         return next();
     }
     res.redirect("/login");
+};
+
+function search(object, wordRequest){
+    var ret = false;
+    var text = object.title.split(" ");
+    text.push.apply(text, object.descr.split(" "));
+    wordRequest = wordRequest.split(" ");
+    console.log(wordRequest);
+    wordRequest.forEach(function(wordRequested){
+        text.forEach(function(word){
+           if(word.toLowerCase() == wordRequested.toLowerCase()){
+                ret = true;
+           }
+        });
+    });
+    return ret;
 };
