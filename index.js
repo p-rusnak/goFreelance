@@ -56,19 +56,23 @@ routes.get("/offers", function(req, res){
 });
 
 routes.post("/offers", isLoggedIn, function(req, res){
-    Post.create({
-        author: req.user.username,
-        title: req.body.title,
-        descr: req.body.descr,
-        price: req.body.price
-    }, function(err, item){
-        if(err){
-            console.log("error");
-            res.render("offers/new");
-        } else {
-            res.render("offers/show", {post: item});
-        }
-    });
+    if( req.body.title == "" || req.body.descr == "" || req.body.price == ""){
+        res.redirect("/offers/new")
+    } else {
+        Post.create({
+            author: req.user.username,
+            title: req.body.title,
+            descr: req.body.descr,
+            price: req.body.price
+        }, function(err, item){
+            if(err){
+                console.log("error");
+                res.render("offers/new");
+            } else {
+                res.render("offers/show", {post: item});
+            }
+        });
+    }
 });
 
 routes.get("/offers/new", isLoggedIn, function(req, res) {
@@ -87,6 +91,9 @@ routes.get("/offers/:id", function(req, res){
 
 
 routes.post("/offers/:id/comments", isLoggedIn, function(req, res) {
+    if( req.body.context == "" ||  req.body.price == ""){
+        res.redirect("/offers/"+req.params.id)
+    } else {
     Post.findById(req.params.id, function(err, post){
         if(err){
             console.log(err);
@@ -107,6 +114,7 @@ routes.post("/offers/:id/comments", isLoggedIn, function(req, res) {
             });
         }
     });
+    }
 });
 
 
