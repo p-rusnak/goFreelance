@@ -14,7 +14,7 @@ Simple website like freelance.com with offers from scratch
 
 # style all the pages!!!
 
-#hiroku
+# heroku
 
 # already done
 - very basic styling and routing, main setup

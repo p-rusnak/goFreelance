@@ -2,7 +2,16 @@
 
 <div class="container offers main">
     <div class="container">
-        Advanced search with tags ...placeholder...  
+       <form style="padding: 0">
+           Sort by:
+            <select>
+              <option value="b1">Budget /\</option>
+              <option value="b2">Budget \/</option>
+              <option value="d1">Date /\</option>
+              <option value="d2">Date \/</option>
+              <option value="r">Most rlevant</option>
+            </select>
+        </form> 
     </div>
     <ul class = "postfield">
         <% var i = 1, perPage = 3; 
@@ -21,9 +30,13 @@
         <% } i++; }); %>
     </ul>
 
+        
+
+</div>
+   <div class="container">
+ 
         <ul class="pagination">
-             <% 
-             if(page == 1){%>
+             <%  if(page == 1){%>
                  <li class="disabled"><span><</span>
              <% } else { %>
                 <li><a href="?p=<%= page-1 %>"><span><</span></a></li>
@@ -42,7 +55,7 @@
              } %>
              
                   
-             
+          
              <% } else {
                  if(page > 5 && page < Math.ceil(i/perPage)-3){ %>
                      
@@ -88,8 +101,5 @@
              <% } %>
 
         </ul>  
-
 </div>
-
-
 <% include ../partials/footer %>

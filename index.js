@@ -55,8 +55,20 @@ routes.get("/offers", function(req, res){
         } else {
              if(req.query.s){
                 item.forEach(function(post){
-                   if (search(post, req.query.s)){
-                       items.push(post);
+                    var relevancy = search(post, req.query.s);
+                   if ( relevancy > 0){
+                        var rel = [0];
+                        for(var i = 0; i <= items.length; i++){
+                            if(rel[i] < relevancy){
+                                rel.unshift(relevancy);
+                                
+                                items.unshift(post);
+                                break;
+                                console.log(rel);
+                            }
+                        }
+                       
+                         console.log(items);
                    }
                  });
                  
@@ -182,16 +194,16 @@ function isLoggedIn(req, res, next){
 };
 
 function search(object, wordRequest){
-    var ret = false;
+    var relevancy = false;
     var text = object.title.split(" ");
     text.push.apply(text, object.descr.split(" "));
     wordRequest = wordRequest.split(" ");
     wordRequest.forEach(function(wordRequested){
         text.forEach(function(word){
            if(word.toLowerCase() == wordRequested.toLowerCase()){
-                ret = true;
+                relevancy++;
            }
         });
     });
-    return ret;
+    return relevancy;
 };

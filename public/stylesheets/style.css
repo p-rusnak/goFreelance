@@ -18,10 +18,6 @@ a {
     color: black;
 }
 
-.landing {
-    padding-bottom: 
-}
-
 a:hover, a:focus{
     color: black;
     text-decoration: none;
@@ -81,6 +77,10 @@ nav {
     color: #962d9b;
 }
 
+.searchbar:focus {
+      border: 1px solid #6f2172;
+      outline: none;
+}
 .landing {
     
     padding-bottom: 100px;
@@ -158,7 +158,27 @@ nav {
 
 .pagination {
     float: right;
-    margin: 5px 15px;
+    margin: 5px 0;
+    background-color: #962d9b;
+}
+
+.pagination li a{
+    color: #962d9b;
+}
+
+.pagination>.active>a {
+    background-color: #962d9b;
+    border: 1px solid #802896;
+}
+
+.pagination>.active>a:hover {
+    background-color: #802896;
+    border: 1px solid #802896;
+}
+
+.pagination>.active>a:focus {
+    background-color: #802896;
+    border: 1px solid #802896;
 }
 /* show page */
 
