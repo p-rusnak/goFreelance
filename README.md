@@ -6,10 +6,11 @@ Simple website like freelance.com with offers from scratch
 - account types
 - user pages
 - flash messages
-- tags and pagination
-- >REFACTOR INDEX<
+- tags
+- >REFACTOR INDEX
 - one comment per user
-- >EDIT AND DELETE<
+- >EDIT AND DELETE
+- refactor CSS
 
 # style all the pages!!!
 
@@ -20,3 +21,4 @@ Simple website like freelance.com with offers from scratch
 - offers get route styled, acces to DB, more styling
 - login, authentication, creating offers and comments/bids
 - search bar
+- pagination

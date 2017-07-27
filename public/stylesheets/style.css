@@ -156,7 +156,10 @@ nav {
     
 }
 
-
+.pagination {
+    float: right;
+    margin: 5px 15px;
+}
 /* show page */
 
 

@@ -1,9 +1,14 @@
 <% include ../partials/header %>
 
 <div class="container offers main">
-    
+    <div class="container">
+        Advanced search with tags ...placeholder...  
+    </div>
     <ul class = "postfield">
-        <% posts.forEach(function(post){ %>
+        <% var i = 1, perPage = 3; 
+        posts.forEach(function(post){
+            if(i > (page-1)*perPage && i <= page*perPage){ %>
+                
                 <li class = "post" onclick="window.location.href='/offers/<%= post._id %>'">
                      <div id="title"><strong><%= post.title %></strong></div>
                      <div id="price"><%= post.price %> PLN </div>
@@ -12,9 +17,35 @@
                          <p id="author"> <%= post.author %></p>
                     </div>
                </li>
-        <% }); %>
+               
+        <% } i++; }); %>
     </ul>
-    
+
+        <ul class="pagination">
+             <% if(page == 1){%>
+                 <li class="disabled"><span><</span>
+             <% } else { %>
+                <li><a href="?p=<%= page-1 %>"><span><</span></a></li>
+             <% } %>
+                 
+                 
+                 
+            <% for(var j = 1; !(j > Math.ceil(i/perPage)); j++){ 
+                if(j == page){ %>
+                    <li class="active"><a href="?p=<%= j %>"><%= j %></a></li>
+                <% } else { %>
+                    <li><a href="?p=<%= j %>"><%= j %></a></li>
+                <% }
+             } %>
+             
+             <% if(!( page > i/perPage) ){%>
+                <li><a href="?p=<%= ++page %>"><span>></span></a></li>
+             <% } else { %>
+                <li class="disabled"><span>></span>
+             <% } %>
+
+        </ul>  
+
 </div>
 
 

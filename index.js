@@ -44,6 +44,10 @@ routes.get("/", function(req, res){
 
 
 routes.get("/offers", function(req, res){
+    var page = 1;
+    if(req.query.p){
+        page = req.query.p;
+    }
     Post.find({}, function(err, item){
         var items = new Array;
         if(err){
@@ -56,9 +60,9 @@ routes.get("/offers", function(req, res){
                    }
                  });
                  
-                res.render("offers/offers", {posts: items});
+                res.render("offers/offers", {posts: items, page: page});
             }  else {
-            res.render("offers/offers", {posts: item})
+            res.render("offers/offers", {posts: item, page: page})
             }
         }
     });
