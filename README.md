@@ -8,17 +8,17 @@ Simple website like freelance.com with offers from scratch
 - flash messages
 - tags
 - >REFACTOR INDEX
-- one comment per user
 - >EDIT AND DELETE
 - refactor CSS
 
 # style all the pages!!!
 
-# heroku
+# go heroku
 
 # already done
 - very basic styling and routing, main setup
 - offers get route styled, acces to DB, more styling
 - login, authentication, creating offers and comments/bids
-- search bar
-- pagination
+- search bar, pagination
+- more validations
+- default sort by date, search deafault sort by relevancy

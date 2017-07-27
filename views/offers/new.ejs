@@ -5,8 +5,8 @@
     <h1 class="title">Create new offer</h1>
     
     <form action="/offers" method="POST">
-        <input type="text" name="title" placeholder="Title" required>
-        <textarea type="text" name="descr" placeholder="Descritpion" required></textarea>
+        <input type="text" name="title" placeholder="Title" required pattern=".{5,}" title="Title should be longer than 5 characters">
+        <textarea type="text" name="descr" placeholder="Descritpion" required pattern=".{10,}" title="Title should be longer than 10 characters"></textarea>
         <input type="number" min="0.00" name="price" placeholder="Price in PLN" required>
         <button >Submit</button>
     </form>

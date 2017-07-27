@@ -14,7 +14,7 @@
         </form> 
     </div>
     <ul class = "postfield">
-        <% var i = 1, perPage = 3; 
+        <% var i = 1, perPage = 7; 
         posts.forEach(function(post){
             if(i > (page-1)*perPage && i <= page*perPage){ %>
                 
@@ -23,7 +23,7 @@
                      <div id="price"><%= post.price %> PLN </div>
                      <div id="descr"> <%= post.descr %> </div>
                      <div>
-                         <p id="author"> <%= post.author %></p>
+                         <p id="author"> <%= post.author %> - <%= timeSince(post.date) %></p>
                     </div>
                </li>
                
@@ -33,13 +33,14 @@
         
 
 </div>
+
+<% if(i/perPage > 1){ %>
    <div class="container">
- 
         <ul class="pagination">
              <%  if(page == 1){%>
                  <li class="disabled"><span><</span>
              <% } else { %>
-                <li><a href="?p=<%= page-1 %>"><span><</span></a></li>
+                <li><a href="?p=<%= page-1 %><%= params.search %>"><span><</span></a></li>
              <% } %>
                  
                  
@@ -48,9 +49,9 @@
                  
             <% for(var j = 1; !(j > Math.ceil(i/perPage)); j++){ 
                 if(j == page){ %>
-                    <li class="active"><a href="?p=<%= j %>"><%= j %></a></li>
+                    <li class="active"><a href="?p=<%= j %><%= params.search %>"><%= j %></a></li>
                 <% } else { %>
-                    <li><a href="?p=<%= j %>"><%= j %></a></li>
+                    <li><a href="?p=<%= j %><%= params.search %>"><%= j %></a></li>
                 <% }
              } %>
              
@@ -59,47 +60,79 @@
              <% } else {
                  if(page > 5 && page < Math.ceil(i/perPage)-3){ %>
                      
-                     <li><a href="?p=1">1</a></li>
+                     <li><a href="?p=1<%= params.search %>">1</a></li>
                      <% if(page-2 == 2){ %>
-                         <li><a href="?p=<%= page-2 %>"> <%= page-2 %> </a></li>
+                         <li><a href="?p=<%= page-2 %><%= params.search %>"> <%= page-2 %> </a></li>
                      <% } else { %>
                          <li><span>...</span></li>
-                         <li><a href="?p=<%= page-2 %>"> <%= page-2 %> </a></li>
+                         <li><a href="?p=<%= page-2 %><%= params.search %>"> <%= page-2 %> </a></li>
                      <% } %>
-                     <li><a href="?p=<%= page-1 %>"> <%= page-1 %> </a></li>
-                     <li class="active"><a href="?p=<%= page %>"> <%= page %> </a></li>
-                     <li><a href="?p=<%= +page+1 %>"> <%= +page+1 %> </a></li>
-                         <li><a href="?p=<%= +page+2 %>"> <%= +page+2 %> </a></li>
+                     <li><a href="?p=<%= page-1 %><%= params.search %>"> <%= page-1 %> </a></li>
+                     <li class="active"><a href="?p=<%= page %><%= params.search %>"> <%= page %> </a></li>
+                     <li><a href="?p=<%= +page+1 %><%= params.search %>"> <%= +page+1 %> </a></li>
+                         <li><a href="?p=<%= +page+2 %><%= params.search %>"> <%= +page+2 %> </a></li>
                      <% if(+page+3 == Math.ceil(i/perPage)-1) { %>
-                         <li><a href="?p=<%= Math.ceil(i/perPage)-1 %>"> <%= Math.ceil(i/perPage)-1 %> </a></li>
+                         <li><a href="?p=<%= Math.ceil(i/perPage)-1 %><%= params.search %>"> <%= Math.ceil(i/perPage)-1 %> </a></li>
                      <% } else { %>
                          <li><span>...</span></li>
                      <% } %>
-                         <li><a href="?p=<%= Math.ceil(i/perPage) %>"> <%= Math.ceil(i/perPage) %> </a></li>
+                         <li><a href="?p=<%= Math.ceil(i/perPage) %><%= params.search %>"> <%= Math.ceil(i/perPage) %> </a></li>
                 <% } else { 
                         if(page <= 5) { 
                             for(var j = 1; j <=7; j++){ %>
                                 <li <% if( j == page ){ %> class="active" <% } %>
-                                ><a href="?p=<%= j %>"><%= j %></a></li></a></li>
+                                ><a href="?p=<%= j %><%= params.search %>"><%= j %></a></li></a></li>
                             <% } %>
                             <li><span>...</span></li>
-                            <li><a href="?p=<%= Math.ceil(i/perPage) %>"> <%= Math.ceil(i/perPage) %> </a></li>
+                            <li><a href="?p=<%= Math.ceil(i/perPage) %><%= params.search %>"> <%= Math.ceil(i/perPage) %> </a></li>
                         <% } else { %>
                         
-                            <li><a href="?p=1">1</a></li>
+                            <li><a href="?p=1<%= params.search %>">1</a></li>
                             <li><span>...</span></li>
                              <% for(var j = Math.ceil(i/perPage)-6; j <=Math.ceil(i/perPage); j++){ %>
                                 <li <% if( j == page ){ %> class="active" <% } %>
-                                ><a href="?p=<%= j %>"><%= j %></a></li></a></li>
+                                ><a href="?p=<%= j %><%= params.search %>"><%= j %></a></li></a></li>
                             <% } %>
              <% } } } %>
              
              <% if(!( page >= i/perPage) ){%>
-                <li><a href="?p=<%= ++page %>"><span>></span></a></li>
+                <li><a href="?p=<%= ++page %><%= params.search %>"><span>></span></a></li>
              <% } else { %>
                 <li class="disabled"><span>></span>
              <% } %>
 
         </ul>  
-</div>
+    </div>
+<% } %>
+
+<%
+function timeSince(date) {
+
+      var seconds = Math.floor((new Date() - date) / 1000);
+    
+      var interval = Math.floor(seconds / 31536000);
+    
+      if (interval > 1) {
+        return interval + " years ago";
+      }
+      interval = Math.floor(seconds / 2592000);
+      if (interval > 1) {
+        return interval + " months ago";
+      }
+      interval = Math.floor(seconds / 86400);
+      if (interval > 1) {
+        return interval + " days ago";
+      }
+      interval = Math.floor(seconds / 3600);
+      if (interval > 1) {
+        return interval + " hours ago";
+      }
+      interval = Math.floor(seconds / 60);
+      if (interval > 1) {
+        return interval + " minutes ago";
+      }
+      return "Less than minute ago";
+    }
+ %>
+
 <% include ../partials/footer %>

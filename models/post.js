@@ -5,6 +5,7 @@ var postSchema = new mongoose.Schema({
     title: String,
     descr: String,
     price: Number,
+    date : Date,
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,

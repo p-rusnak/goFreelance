@@ -8,11 +8,11 @@ var routes = express();
 
 var Post    = require("./models/post"),
     User    = require("./models/user"),
-    Comment = require("./models/comment"),
-    seedDB  = require("./seeds");
+    Comment = require("./models/comment");
+//    clearDB  = require("./seeds");
     
     
-//seedDB();
+//clearDB();
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/gf_db', {useMongoClient: true});
@@ -44,7 +44,13 @@ routes.get("/", function(req, res){
 
 
 routes.get("/offers", function(req, res){
-    var page = 1;
+    var page = 1,
+        searchString;
+    if(req.query.s){ searchString = "&s=" + req.query.s; }
+    var params = {
+        sort : req.query.q,
+        search : searchString
+    };
     if(req.query.p){
         page = req.query.p;
     }
@@ -54,27 +60,30 @@ routes.get("/offers", function(req, res){
             console.log("error");
         } else {
              if(req.query.s){
+                 
+                var rel = [0];
                 item.forEach(function(post){
                     var relevancy = search(post, req.query.s);
                    if ( relevancy > 0){
-                        var rel = [0];
                         for(var i = 0; i <= items.length; i++){
                             if(rel[i] < relevancy){
-                                rel.unshift(relevancy);
+                                rel.splice(i, 0, relevancy);
                                 
-                                items.unshift(post);
-                                break;
+                                items.splice(i, 0, post);
                                 console.log(rel);
+                                break;
                             }
                         }
-                       
-                         console.log(items);
                    }
                  });
                  
-                res.render("offers/offers", {posts: items, page: page});
+                res.render("offers/offers", {posts: items, page: page, params: params});
             }  else {
-            res.render("offers/offers", {posts: item, page: page})
+            item.forEach(function(post){
+                items.unshift(post);
+                
+            });
+            res.render("offers/offers", {posts: items, page: page, params: params});
             }
         }
     });
@@ -82,19 +91,20 @@ routes.get("/offers", function(req, res){
 
 routes.post("/offers", isLoggedIn, function(req, res){
     if( req.body.title == "" || req.body.descr == "" || req.body.price == ""){
-        res.redirect("/offers/new")
+        res.redirect("/offers/new");
     } else {
         Post.create({
             author: req.user.username,
             title: req.body.title,
             descr: req.body.descr,
-            price: req.body.price
+            price: req.body.price,
+            date : Date.now()
         }, function(err, item){
             if(err){
                 console.log("error");
                 res.render("offers/new");
             } else {
-                res.render("offers/show", {post: item});
+                res.render("offers/show", {post: item, status: false});
             }
         });
     }
@@ -109,7 +119,22 @@ routes.get("/offers/:id", function(req, res){
         if(err){
             res.send("Id not found");
         } else {
-            res.render("offers/show", {post: foundPost});
+            var commentingStatus = true;
+            if(req.user != undefined){
+                if(req.user.username != foundPost.author){
+                    foundPost.comments.forEach(function(comment){
+                        if(comment.author == req.user.username){
+                            commentingStatus = false;
+                        }
+                    });
+                } else {
+                    commentingStatus = false;
+                }
+            } else {
+                commentingStatus = false;
+            }
+
+            res.render("offers/show", {post: foundPost, status: commentingStatus});
         }
     });
 });
@@ -117,26 +142,36 @@ routes.get("/offers/:id", function(req, res){
 
 routes.post("/offers/:id/comments", isLoggedIn, function(req, res) {
     if( req.body.context == "" ||  req.body.price == ""){
-        res.redirect("/offers/"+req.params.id)
+        res.redirect("/offers/"+req.params.id);
     } else {
-    Post.findById(req.params.id, function(err, post){
+    Post.findById(req.params.id).populate("comments").exec(function(err, post){
         if(err){
             console.log(err);
         } else {
-            var comment = {
-                author : req.user.username,
-                context : req.body.context,
-                date : Date.now()
-            }
-            Comment.create(comment, function(err, comment){
-               if(err) {
-                   console.log(err)
-               } else {
-                   post.comments.push(comment);
-                   post.save();
-                   res.redirect("/offers/"+post._id);
-               }
+            var canComment = true;
+            post.comments.forEach(function(comm){
+              if(req.user.username == comm.author){
+                  canComment = false;
+              } 
             });
+            if(canComment == true){
+                var comment = {
+                    author : req.user.username,
+                    context : req.body.context,
+                    date : Date.now()
+                };
+                Comment.create(comment, function(err, comment){
+                   if(err) {
+                       console.log(err);
+                   } else {
+                       post.comments.push(comment);
+                       post.save();
+                       res.redirect("/offers/"+post._id);
+                   }
+                });
+            } else {
+                res.redirect("/offers/"+req.params.id);
+            }
         }
     });
     }
@@ -152,7 +187,7 @@ routes.post("/register", function(req, res){
        {username: req.body.username}),
         req.body.password, function(err, user){
             if(err){
-                console.log(err)
+                console.log(err);
                 return res.render("register");
             }
                 passport.authenticate("local")(req, res, function(){
@@ -191,7 +226,7 @@ function isLoggedIn(req, res, next){
         return next();
     }
     res.redirect("/login");
-};
+}
 
 function search(object, wordRequest){
     var relevancy = false;
@@ -200,10 +235,12 @@ function search(object, wordRequest){
     wordRequest = wordRequest.split(" ");
     wordRequest.forEach(function(wordRequested){
         text.forEach(function(word){
+            word = word.replace(/,|\.|\?|!|\"/g, "");
+            console.log(word );
            if(word.toLowerCase() == wordRequested.toLowerCase()){
                 relevancy++;
            }
         });
     });
     return relevancy;
-};
+}

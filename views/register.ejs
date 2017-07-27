@@ -5,8 +5,8 @@
     <h1> REGISTER !</h1>
     
     <form action="/register" method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="username" placeholder="Username" required pattern=".{5, 17}" title="User name should be between 5 and 17 characters">
+        <input type="password" name="password" placeholder="Password" required pattern=".{5, 17}" title="User name should be between 5 and 17 characters"> 
         <button class="btn">Submit</button>
     </form>
 </div>

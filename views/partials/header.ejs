@@ -36,7 +36,7 @@
                 <div class="collapse navbar-collapse">
                 <form action="/offers" method="GET" class="navbar-form navbar-left">
                     <div class="form-group">
-                      <input type="text" name="s" class="form-control searchbar" placeholder="Search">
+                      <input type="text" name="s" class="form-control searchbar" placeholder="Search" pattern=".{3,}" title="Minimum 3 characters">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                  </form>
