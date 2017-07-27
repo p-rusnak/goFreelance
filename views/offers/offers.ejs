@@ -22,13 +22,16 @@
     </ul>
 
         <ul class="pagination">
-             <% if(page == 1){%>
+             <% 
+             if(page == 1){%>
                  <li class="disabled"><span><</span>
              <% } else { %>
                 <li><a href="?p=<%= page-1 %>"><span><</span></a></li>
              <% } %>
                  
                  
+                 
+            <% if(i/perPage < 7){    %>  
                  
             <% for(var j = 1; !(j > Math.ceil(i/perPage)); j++){ 
                 if(j == page){ %>
@@ -38,7 +41,47 @@
                 <% }
              } %>
              
-             <% if(!( page > i/perPage) ){%>
+                  
+             
+             <% } else {
+                 if(page > 5 && page < Math.ceil(i/perPage)-3){ %>
+                     
+                     <li><a href="?p=1">1</a></li>
+                     <% if(page-2 == 2){ %>
+                         <li><a href="?p=<%= page-2 %>"> <%= page-2 %> </a></li>
+                     <% } else { %>
+                         <li><span>...</span></li>
+                         <li><a href="?p=<%= page-2 %>"> <%= page-2 %> </a></li>
+                     <% } %>
+                     <li><a href="?p=<%= page-1 %>"> <%= page-1 %> </a></li>
+                     <li class="active"><a href="?p=<%= page %>"> <%= page %> </a></li>
+                     <li><a href="?p=<%= +page+1 %>"> <%= +page+1 %> </a></li>
+                         <li><a href="?p=<%= +page+2 %>"> <%= +page+2 %> </a></li>
+                     <% if(+page+3 == Math.ceil(i/perPage)-1) { %>
+                         <li><a href="?p=<%= Math.ceil(i/perPage)-1 %>"> <%= Math.ceil(i/perPage)-1 %> </a></li>
+                     <% } else { %>
+                         <li><span>...</span></li>
+                     <% } %>
+                         <li><a href="?p=<%= Math.ceil(i/perPage) %>"> <%= Math.ceil(i/perPage) %> </a></li>
+                <% } else { 
+                        if(page <= 5) { 
+                            for(var j = 1; j <=7; j++){ %>
+                                <li <% if( j == page ){ %> class="active" <% } %>
+                                ><a href="?p=<%= j %>"><%= j %></a></li></a></li>
+                            <% } %>
+                            <li><span>...</span></li>
+                            <li><a href="?p=<%= Math.ceil(i/perPage) %>"> <%= Math.ceil(i/perPage) %> </a></li>
+                        <% } else { %>
+                        
+                            <li><a href="?p=1">1</a></li>
+                            <li><span>...</span></li>
+                             <% for(var j = Math.ceil(i/perPage)-6; j <=Math.ceil(i/perPage); j++){ %>
+                                <li <% if( j == page ){ %> class="active" <% } %>
+                                ><a href="?p=<%= j %>"><%= j %></a></li></a></li>
+                            <% } %>
+             <% } } } %>
+             
+             <% if(!( page >= i/perPage) ){%>
                 <li><a href="?p=<%= ++page %>"><span>></span></a></li>
              <% } else { %>
                 <li class="disabled"><span>></span>
