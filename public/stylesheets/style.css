@@ -6,7 +6,6 @@ html {
   box-sizing: border-box;
 }
 
-
 body {
     background-color: #f2f2f2;
     position: relative;
@@ -69,7 +68,7 @@ button:focus {
 }
 
 @media (max-width: 767px) { 
-    button    {
+    btn-main {
             display: block;
             width: 70%;
             height: 100px;

@@ -182,7 +182,6 @@ function search(object, wordRequest){
     var text = object.title.split(" ");
     text.push.apply(text, object.descr.split(" "));
     wordRequest = wordRequest.split(" ");
-    console.log(wordRequest);
     wordRequest.forEach(function(wordRequested){
         text.forEach(function(word){
            if(word.toLowerCase() == wordRequested.toLowerCase()){
