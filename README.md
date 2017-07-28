@@ -7,7 +7,6 @@ Simple website like freelance.com with offers from scratch
 - user pages
 - flash messages
 - tags
-- >REFACTOR INDEX
 - >EDIT AND DELETE
 - refactor CSS
 

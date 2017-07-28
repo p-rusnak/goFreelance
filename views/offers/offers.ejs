@@ -5,10 +5,10 @@
        <form style="padding: 0">
            Sort by:
             <select>
-              <option value="b1">Budget /\</option>
-              <option value="b2">Budget \/</option>
               <option value="d1">Date /\</option>
               <option value="d2">Date \/</option>
+              <option value="b1">Budget /\</option>
+              <option value="b2">Budget \/</option>
               <option value="r">Most rlevant</option>
             </select>
         </form> 
@@ -34,7 +34,7 @@
 
 </div>
 
-<% if(i/perPage > 1){ %>
+<% if((i-1)/perPage > 1){ %>
    <div class="container">
         <ul class="pagination">
              <%  if(page == 1){%>
