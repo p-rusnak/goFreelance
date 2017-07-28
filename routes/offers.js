@@ -13,7 +13,7 @@ var middleware = require("../middleware/logged.js");
 routes.get("/", function(req, res){
     var page = 1,
         searchString,
-        sorting = 1;
+        sorting = 4;
     //sorting = req.query.q;
     if(req.query.s){ searchString = "&s=" + req.query.s; }
     var params = {
@@ -48,6 +48,7 @@ routes.get("/", function(req, res){
             }  else {
             var price = [-1];
             var date = [0];
+            var bids = [0];
             item.forEach(function(post){
                 switch(sorting) {
                     case 0:
@@ -90,6 +91,29 @@ routes.get("/", function(req, res){
                             for(var i = 0; i <= items.length; i++){
                                 if(price[i] <= post.price){
                                     price.splice(i, 0, post.price);
+                                    items.splice(i, 0, post);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case 4:
+                        for(var i = 0; i < items.length; i++){
+                            if(bids[i] >= post.comments.length ){
+                                // price.splice(i, 0, post.price);
+                                // items.splice(i, 0, post);
+                                break;
+                            }
+                        }
+                        bids.splice(i, 0, post.comments.length);
+                        items.splice(i, 0, post);
+
+                        break;    
+                    case 5:
+                        if ( post.comments.length > 0){
+                            for(var i = 0; i <= items.length; i++){
+                                if(bids[i] <= post.comments.length){
+                                    bids.splice(i, 0, post.comments.length);
                                     items.splice(i, 0, post);
                                     break;
                                 }
