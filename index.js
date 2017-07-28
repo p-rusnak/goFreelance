@@ -2,6 +2,7 @@ var express       = require("express"),
     mongoose      = require("mongoose"),
     bodyParser    = require("body-parser"),
     passport      = require("passport"),
+    methodOverride = require("method-override"),
     LocalStrategy = require("passport-local");
 var User          = require("./models/user");
 var commentRoutes = require("./routes/comments"),
@@ -9,14 +10,16 @@ var commentRoutes = require("./routes/comments"),
     indexRoutes   = require("./routes/index");
     
 var routes = express();
-//    clearDB  = require("./dbErase");
-//clearDB();
+// var clearDB  = require("./dbErase");
+// clearDB();
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/gf_db', {useMongoClient: true});
 
 
 routes.set("view engine", 'ejs');
+
+routes.use(methodOverride("_method")); 
 routes.use(express.static(__dirname + "/public"));
 routes.use(bodyParser.urlencoded({extended: true}));
 routes.use(require("express-session")({

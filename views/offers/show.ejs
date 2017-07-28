@@ -1,6 +1,6 @@
 <% include ../partials/header %>
-<% include ../functions/timeSince %>
 
+<% include ../functions/timeSince %>
 
 <div class="container offer main">
     
@@ -14,16 +14,19 @@
             <strong>Employer:</strong> <%= post.author %>
         </p>
     </div>
-    <p class="descr">
-        <%= post.descr %>
-    </p>
+    <div class="descr">
+        
+            <%= post.descr %>
+        
+    </div>
     
     <p class="budget">
         Budget: <%= post.price %> PLN
     </p>
     
-    
-    <!--<button class="btn" onclick="window.location.href='/offers'">Go back</button>-->
+    <% if(currentUser) { if(currentUser.username == post.author) { %>
+        <button class="btn edit-btn" >Edit</button>
+    <% } }%>
     
     
 
@@ -55,5 +58,12 @@
         </form>
     <% } %>
 </div>
+
+<script type="text/javascript">
+    document.querySelector(".edit-btn").addEventListener("click", function(){
+       document.querySelector(".descr").innerHTML = "<form action='/offers/<%= post.id %>?_method=PUT' method='POST'> <textarea name='descr' required pattern='.{10,}'title='Description should be longer than 10 characters'><%= post.descr %></textarea><button>Submit</button></form>";
+    });
+</script>
+
 
 <% include ../partials/footer %>

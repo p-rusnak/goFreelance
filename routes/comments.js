@@ -5,7 +5,9 @@ var Post    = require("../models/post"),
     User    = require("../models/user"),
     Comment = require("../models/comment");
 
-var middleware = require("../middleware/logged.js");    
+var logged = require("../middleware/logged.js"),
+    isOwner = require("../middleware/ownership.js");    
+      
     
 routes.get("/", function(req, res){
     Post.findById(req.params.id).populate("comments").exec(function(err, foundPost){
@@ -32,8 +34,17 @@ routes.get("/", function(req, res){
     });
 });
 
+routes.put("/", logged.isLoggedIn, isOwner.offer, function(req, res){
+    Post.findByIdAndUpdate(req.params.id, {descr : req.body.descr}, function(err, foundPost){
+        if(err){
+            console.log(err);
+        } else {
+            res.redirect(req.params.id);
+        }
+    });
     
-routes.post("/comments", middleware.isLoggedIn, function(req, res) {
+});
+routes.post("/comments", logged.isLoggedIn, function(req, res) {
     if( req.body.context == "" ||  req.body.price == ""){
         res.redirect("/offers/"+req.params.id);
     } else {

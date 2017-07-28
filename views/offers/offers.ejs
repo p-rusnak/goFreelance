@@ -1,15 +1,17 @@
 <% include ../partials/header %>
 
+<% include ../functions/timeSince %>
+
+
 <div class="container offers main">
     <div class="container">
        <form style="padding: 0">
            Sort by:
             <select>
-              <option value="d1">Date /\</option>
-              <option value="d2">Date \/</option>
-              <option value="b1">Budget /\</option>
-              <option value="b2">Budget \/</option>
-              <option value="r">Most rlevant</option>
+              <option value="0">Date /\</option>
+              <option value="1">Date \/</option>
+              <option value="2">Budget /\</option>
+              <option value="3">Budget \/</option>
             </select>
         </form> 
     </div>
@@ -34,8 +36,7 @@
 
 </div>
 
-<% include ../partials/pagination %>
-<% include ../functions/timeSince %>
 
+<% include ../partials/pagination %>
 
 <% include ../partials/footer %>

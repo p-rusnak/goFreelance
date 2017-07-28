@@ -4,10 +4,10 @@ Simple website like freelance.com with offers from scratch
 
 # what to do
 - account types
-- user pages
+> user pages
+> accepting and deleting offers
 - flash messages
 - tags
-- >EDIT AND DELETE
 - refactor CSS
 
 # style all the pages!!!
@@ -21,3 +21,5 @@ Simple website like freelance.com with offers from scratch
 - search bar, pagination
 - more validations
 - default sort by date, search deafault sort by relevancy
+- sorting (budget-date up/downd) - (not selectable)
+- Editing offers

@@ -5,16 +5,19 @@ var Post    = require("../models/post"),
     User    = require("../models/user"),
     Comment = require("../models/comment");
 
+
 var middleware = require("../middleware/logged.js");
 
 
 
 routes.get("/", function(req, res){
     var page = 1,
-        searchString;
+        searchString,
+        sorting = 0;
+    //sorting = req.query.q;
     if(req.query.s){ searchString = "&s=" + req.query.s; }
     var params = {
-        sort : req.query.q,
+        sort : sorting,
         search : searchString
     };
     if(req.query.p){
@@ -26,13 +29,13 @@ routes.get("/", function(req, res){
             console.log("error");
         } else {
              if(req.query.s){
-                 
+                
                 var rel = [0];
                 item.forEach(function(post){
                     var relevancy = search(post, req.query.s);
                    if ( relevancy > 0){
                         for(var i = 0; i <= items.length; i++){
-                            if(rel[i] < relevancy){
+                            if(rel[i] <= relevancy){
                                 rel.splice(i, 0, relevancy);
                                 items.splice(i, 0, post);
                                 break;
@@ -43,8 +46,59 @@ routes.get("/", function(req, res){
                  
                 res.render("offers/offers", {posts: items, page: page, params: params});
             }  else {
+            var price = [-1];
+            var date = [0];
             item.forEach(function(post){
-                items.unshift(post);
+                switch(sorting) {
+                    case 0:
+                        for(var i = 0; i < items.length; i++){
+                            if(date[i] >= post.date.getTime() ){
+                                // price.splice(i, 0, post.price);
+                                // items.splice(i, 0, post);
+                                break;
+                            }
+                        }
+                        date.splice(i, 0, post.date.getTime());
+                        items.splice(i, 0, post);
+
+                        break;    
+                    case 1:
+                        if ( post.date.getTime() > 0){
+                            for(var i = 0; i <= items.length; i++){
+                                if(date[i] <= post.date.getTime()){
+                                    date.splice(i, 0, post.date.getTime());
+                                    items.splice(i, 0, post);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case 2:
+                        for(var i = 0; i < items.length; i++){
+                            if(price[i] >= post.price ){
+                                // price.splice(i, 0, post.price);
+                                // items.splice(i, 0, post);
+                                break;
+                            }
+                        }
+                        price.splice(i, 0, post.price);
+                        items.splice(i, 0, post);
+
+                        break;    
+                    case 3:
+                        if ( post.price > 0){
+                            for(var i = 0; i <= items.length; i++){
+                                if(price[i] <= post.price){
+                                    price.splice(i, 0, post.price);
+                                    items.splice(i, 0, post);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        items.unshift(post);
+                }
                 
             });
             res.render("offers/offers", {posts: items, page: page, params: params});
@@ -77,6 +131,7 @@ routes.post("/", middleware.isLoggedIn, function(req, res){
 routes.get("/new", middleware.isLoggedIn, function(req, res) {
     res.render("offers/new");
 });
+
 
 
 
