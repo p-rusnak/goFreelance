@@ -25,7 +25,7 @@
     </p>
     
     <% if(currentUser) { if(currentUser.username == post.author) { %>
-        <button class="btn edit-btn" >Edit</button>
+        <button class="btn edit-btn" onclick = "editDescr()">Edit</button>
     <% } }%>
     
     
@@ -60,9 +60,9 @@
 </div>
 
 <script type="text/javascript">
-    document.querySelector(".edit-btn").addEventListener("click", function(){
+    function editDescr(){
        document.querySelector(".descr").innerHTML = "<form action='/offers/<%= post.id %>?_method=PUT' method='POST'> <textarea name='descr' required pattern='.{10,}'title='Description should be longer than 10 characters'><%= post.descr %></textarea><button>Submit</button></form>";
-    });
+    }
 </script>
 
 

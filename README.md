@@ -10,6 +10,10 @@ Simple website like freelance.com with offers from scratch
 - tags
 - refactor CSS
 
+# bugs and things that need change:
+- cant reach eddit form for few projects
+- username is case-sensitive
+
 # style all the pages!!!
 
 # go heroku
