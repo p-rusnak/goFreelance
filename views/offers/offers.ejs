@@ -24,6 +24,7 @@
                      <div id="title"><strong><%= post.title %></strong></div>
                      <div id="price"><%= post.price %> PLN </div>
                      <div id="descr"> <%= post.descr %> </div>
+                     <div id="amount" style="float: left;"> Bids: <%= post.comments.length %>  </div>
                      <div>
                          <p id="author"> <%= post.author %> - <%= timeSince(post.date) %></p>
                     </div>

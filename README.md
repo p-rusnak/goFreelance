@@ -4,8 +4,8 @@ Simple website like freelance.com with offers from scratch
 
 # what to do
 - account types
-> user pages
-> accepting and deleting offers
+> - user pages
+> - accepting and deleting offers
 - flash messages
 - tags
 - refactor CSS
