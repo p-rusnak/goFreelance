@@ -5,14 +5,19 @@
 
 <div class="container offers main">
     <div class="container">
-       <form style="padding: 0">
+       <form style="padding: 0" action="/offers?" methot="GET">
            Sort by:
-            <select>
-              <option value="0">Date /\</option>
-              <option value="1">Date \/</option>
-              <option value="2">Budget /\</option>
-              <option value="3">Budget \/</option>
+            <select name='r'>
+              <option <% if(params.sort == 0){ %>selected<% } %> value="0">Date /\</option>
+              <option <% if(params.sort == 1){ %>selected<% } %> value="1">Date \/</option>
+              <option <% if(params.sort == 2){ %>selected<% } %> value="2">Budget /\</option>
+              <option <% if(params.sort == 3){ %>selected<% } %> value="3">Budget \/</option>
+              <option <% if(params.sort == 4){ %>selected<% } %> value="4">Bids /\</option>
+              <option <% if(params.sort == 5){ %>selected<% } %> value="5">Bids \/</option>
             </select>
+              <% if(params.page>1){ %><input type="hidden" name="p" value="<%= params.page %>" /> <% } %>
+              <% if(params.searchOnly != ''){ %><input type="hidden" name="s" value="<%= params.searchOnly %>" />   <% } %>
+            <button>Change</button>
         </form> 
     </div>
     <ul class = "postfield">

@@ -12,45 +12,58 @@ var middleware = require("../middleware/logged.js");
 
 routes.get("/", function(req, res){
     var page = 1,
-        searchString,
-        sorting = 4;
+        searchString = '',
+        searchOnly = '',
+        sorting = 0;
     //sorting = req.query.q;
-    if(req.query.s){ searchString = "&s=" + req.query.s; }
-    var params = {
-        sort : sorting,
-        search : searchString
-    };
-    if(req.query.p){
+    if(req.query.s){ 
+        searchString += "&s=" + req.query.s; 
+        searchOnly = req.query.s;
+    }
+    if(req.query.r){ 
+        searchString += "&r=" + req.query.r; 
+        sorting = req.query.r;
+    }
+    if(req.query.p){ 
         page = req.query.p;
     }
+    var params = {
+        sort : sorting,
+        search : searchString,
+        searchOnly : searchOnly
+    };
     Post.find({}, function(err, item){
-        var items = new Array;
+        var items = new Array,
+            item2 = item;
         if(err){
             console.log("error");
         } else {
              if(req.query.s){
-                
+                item = [];
                 var rel = [0];
-                item.forEach(function(post){
+                item2.forEach(function(post){
                     var relevancy = search(post, req.query.s);
                    if ( relevancy > 0){
                         for(var i = 0; i <= items.length; i++){
                             if(rel[i] <= relevancy){
                                 rel.splice(i, 0, relevancy);
-                                items.splice(i, 0, post);
+                                item.splice(i, 0, post);
                                 break;
                             }
                         }
                    }
                  });
                  
-                res.render("offers/offers", {posts: items, page: page, params: params});
-            }  else {
+                // res.render("offers/offers", {posts: items, page: page, params: params});
+            } // else {
             var price = [-1];
             var date = [0];
             var bids = [0];
+            
             item.forEach(function(post){
-                switch(sorting) {
+                //TODO: clean this mess ...
+                
+                switch(Number(sorting)) {
                     case 0:
                         for(var i = 0; i < items.length; i++){
                             if(date[i] >= post.date.getTime() ){
@@ -64,7 +77,7 @@ routes.get("/", function(req, res){
 
                         break;    
                     case 1:
-                        if ( post.date.getTime() > 0){
+                      //  if ( post.date.getTime() > 0){
                             for(var i = 0; i <= items.length; i++){
                                 if(date[i] <= post.date.getTime()){
                                     date.splice(i, 0, post.date.getTime());
@@ -72,7 +85,7 @@ routes.get("/", function(req, res){
                                     break;
                                 }
                             }
-                        }
+                       // }
                         break;
                     case 2:
                         for(var i = 0; i < items.length; i++){
@@ -87,15 +100,16 @@ routes.get("/", function(req, res){
 
                         break;    
                     case 3:
-                        if ( post.price > 0){
+                    //    if ( post.price > 0){
                             for(var i = 0; i <= items.length; i++){
                                 if(price[i] <= post.price){
                                     price.splice(i, 0, post.price);
                                     items.splice(i, 0, post);
                                     break;
                                 }
+                                
                             }
-                        }
+                 //       }
                         break;
                     case 4:
                         for(var i = 0; i < items.length; i++){
@@ -110,15 +124,17 @@ routes.get("/", function(req, res){
 
                         break;    
                     case 5:
-                        if ( post.comments.length > 0){
+                       // if ( post.comments.length >= 0){
                             for(var i = 0; i <= items.length; i++){
+                                console.log(bids[i] + '' + post.comments.length);
                                 if(bids[i] <= post.comments.length){
                                     bids.splice(i, 0, post.comments.length);
                                     items.splice(i, 0, post);
                                     break;
                                 }
+                                
                             }
-                        }
+                      //  }
                         break;
                     default:
                         items.unshift(post);
@@ -126,7 +142,7 @@ routes.get("/", function(req, res){
                 
             });
             res.render("offers/offers", {posts: items, page: page, params: params});
-            }
+            //}
         }
     });
 });
