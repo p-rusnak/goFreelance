@@ -3,6 +3,7 @@ Simple website like freelance.com with offers from scratch
 : https://go-freelance-snaki00.c9users.io :
 
 # what to do
+> - include react
 - account types
 > - user pages
 > - accepting and deleting offers
