@@ -8,6 +8,9 @@
        <form style="padding: 0" action="/offers?" methot="GET">
            Sort by:
             <select name='r'>
+            <% if(params.searchOnly != ''){ %>
+              <option <% if(params.sort == -1){ %>selected<% } %> value="-1">Relevancy</option>
+            <% } %>
               <option <% if(params.sort == 0){ %>selected<% } %> value="0">Date /\</option>
               <option <% if(params.sort == 1){ %>selected<% } %> value="1">Date \/</option>
               <option <% if(params.sort == 2){ %>selected<% } %> value="2">Budget /\</option>

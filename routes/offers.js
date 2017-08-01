@@ -14,7 +14,8 @@ routes.get("/", function(req, res){
     var page = 1,
         searchString = '',
         searchOnly = '',
-        sorting = 1;
+        sorting = 1,
+        isR = true;
     //sorting = req.query.q;
     if(req.query.s){ 
         searchString += "&s=" + req.query.s; 
@@ -23,6 +24,10 @@ routes.get("/", function(req, res){
     if(req.query.r){ 
         searchString += "&r=" + req.query.r; 
         sorting = req.query.r;
+    } 
+    if (req.query.s && req.query.r ==  undefined){
+        console.log(req.query.s + " - " + req.query.r)
+        sorting = -1;
     }
     if(req.query.p){ 
         page = req.query.p;
@@ -30,7 +35,8 @@ routes.get("/", function(req, res){
     var params = {
         sort : sorting,
         search : searchString,
-        searchOnly : searchOnly
+        searchOnly : searchOnly,
+        isR : isR
     };
     Post.find({}, function(err, item){
         var items = new Array,
@@ -137,7 +143,7 @@ routes.get("/", function(req, res){
                       //  }
                         break;
                     default:
-                        items.unshift(post);
+                        items.push(post);
                 }
                 
             });
