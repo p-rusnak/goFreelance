@@ -1,6 +1,6 @@
 # goFreelance
 Simple website like freelance.com with offers from scratch
-: https://go-freelance-snaki00.c9users.io :
+: https://go-freelance-snaki00.c9users.io : sometimes hosted here
 
 # what to do
 - account types
@@ -11,7 +11,7 @@ Simple website like freelance.com with offers from scratch
 - refactor CSS
 
 # bugs and things that need change:
-- cant reach eddit form for few projects
+- ~~cant reach eddit form for few projects~~
 - username is case-sensitive
 
 # style all the pages!!!
@@ -25,5 +25,5 @@ Simple website like freelance.com with offers from scratch
 - search bar, pagination
 - more validations
 - default sort by date, search deafault sort by relevancy
-- sorting (budget-date up/downd) - (not selectable)
+- sorting (budget-date-bids up/downd) - ~~(not selectable)~~ working
 - Editing offers

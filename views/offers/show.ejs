@@ -16,7 +16,7 @@
     </div>
     <div class="descr">
         
-            <%= post.descr %>
+            <%- post.descr.replace(/\n/g, '<br/>').replace(/<script>|<\/script>/g, 'Scripting not allowed').replace(/style="*"/g, "style=''") %>
         
     </div>
     
@@ -61,7 +61,9 @@
 
 <script type="text/javascript">
     function editDescr(){
-       document.querySelector(".descrEditable").innerHTML = "<form action='/offers/<%= post.id %>?_method=PUT' method='POST'> <textarea name='descr' required pattern='.{10,}'title='Description should be longer than 10 characters'><%= post.descr %></textarea><button>Submit</button></form>";
+
+       document.querySelector(".descr").innerHTML = "<form action='/offers/<%= post.id %>?_method=PUT' method='POST'> <textarea name='descr' required pattern='.{10,}'title='Description should be longer than 10 characters'><%=
+       post.descr.replace(/(?:\r\n|\r|\n)/g, '\\n') %></textarea><button>Submit</button></form>";
     }
 </script>
 

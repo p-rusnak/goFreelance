@@ -14,7 +14,7 @@ routes.get("/", function(req, res){
     var page = 1,
         searchString = '',
         searchOnly = '',
-        sorting = 0;
+        sorting = 1;
     //sorting = req.query.q;
     if(req.query.s){ 
         searchString += "&s=" + req.query.s; 
