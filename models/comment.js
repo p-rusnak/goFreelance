@@ -3,7 +3,8 @@ var mongoose = require("mongoose");
 var commentSchema = new mongoose.Schema({
     author: String,
     context: String,
-    date: Date
+    date: Date,
+    price: Number
 });
 
 

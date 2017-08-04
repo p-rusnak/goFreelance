@@ -24,9 +24,11 @@
         Budget: <%= post.price %> PLN
     </p>
     
-    <% if(currentUser) { if(currentUser.username == post.author) { %>
+    <% if(currentUser) { if(currentUser.username == post.author || currentUser.type == 'admin') { %>
         <button class="btn edit-btn" onclick = "editDescr()">Edit</button>
-    <% } }%>
+    <% } if(currentUser.type == 'admin') { %>
+        <form action='/offers/<%= post.id %>?_method=DELETE' method='POST'><button class="btn btn-danger" style="float: left;">Delete</button></form>
+    <% } } %>
     
     
 
@@ -41,7 +43,7 @@
                <a href="#" class="author"> <%= comment.author %> </a>
                <p id="date"> <%= timeSince(comment.date) %><p></p>
                <p class="context"> <%= comment.context %></p>
-               <p class="off-price"> Price-placeholder</p>
+               <p class="off-price"> <%= comment.price %> PLN</p>
                </li>
             <% }); 
             } else {%>
@@ -54,7 +56,7 @@
         <form action="/offers/<%= post._id %>/comments" method="POST">
             <textarea name="context" placeholder="Comment..." required pattern=".{5,}" title="Comment should be longer than 5 characters"></textarea>
             <button class="submit">Bid on this!</button>
-            <input type="number" min="0.00" id="price-form" placeholder="price">
+            <input type="number" name="price" min="0.00" id="price-form" placeholder="price">
         </form>
     <% } %>
 </div>

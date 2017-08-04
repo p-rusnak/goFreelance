@@ -44,6 +44,21 @@ routes.put("/", logged.isLoggedIn, isOwner.offer, function(req, res){
     });
     
 });
+
+routes.delete("/", function(req, res){
+    if(req.user.type == 'admin'){
+        Post.findByIdAndRemove(req.params.id, function(err, deletedPost){
+            if(err){
+                console.log(err);
+            } else {
+                res.redirect('/offers/');       
+            }
+        });
+    } else {
+        res.redirect(req.params.id);
+    }
+});
+
 routes.post("/comments", logged.isLoggedIn, function(req, res) {
     if( req.body.context == "" ||  req.body.price == ""){
         res.redirect("/offers/"+req.params.id);
@@ -62,7 +77,8 @@ routes.post("/comments", logged.isLoggedIn, function(req, res) {
                 var comment = {
                     author : req.user.username,
                     context : req.body.context,
-                    date : Date.now()
+                    date : Date.now(),
+                    price : req.body.price
                 };
                 Comment.create(comment, function(err, comment){
                    if(err) {

@@ -7,7 +7,7 @@ middlewareObject.offer = function (req, res, next){
         if(err){
             console.log(err);
         } else {
-            if(req.user.username == foundPost.author){
+            if(req.user.username == foundPost.author || req.user.type == 'admin'){
                 return next();
             }
         res.redirect("/offers/"+foundPost._id);
@@ -21,7 +21,7 @@ middlewareObject.comment = function (req, res, next){
         if(err){
             console.log(err);
         } else {
-            if(req.user.username == foundPost.author){
+            if(req.user.username == foundPost.author || req.user.type == 'admin'){
                 return next();
             }
         res.redirect("/offers/"+foundPost._id);
