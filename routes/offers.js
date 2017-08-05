@@ -16,7 +16,6 @@ routes.get("/", function(req, res){
         searchOnly = '',
         sorting = 1,
         isR = true;
-    //sorting = req.query.q;
     if(req.query.s){ 
         searchString += "&s=" + req.query.s; 
         searchOnly = req.query.s;
@@ -61,7 +60,7 @@ routes.get("/", function(req, res){
                  });
                  
                 // res.render("offers/offers", {posts: items, page: page, params: params});
-            } // else {
+            } 
             var price = [-1];
             var date = [0];
             var bids = [0];
@@ -73,8 +72,6 @@ routes.get("/", function(req, res){
                     case 0:
                         for(var i = 0; i < items.length; i++){
                             if(date[i] >= post.date.getTime() ){
-                                // price.splice(i, 0, post.price);
-                                // items.splice(i, 0, post);
                                 break;
                             }
                         }
@@ -83,7 +80,6 @@ routes.get("/", function(req, res){
 
                         break;    
                     case 1:
-                      //  if ( post.date.getTime() > 0){
                             for(var i = 0; i <= items.length; i++){
                                 if(date[i] <= post.date.getTime()){
                                     date.splice(i, 0, post.date.getTime());
@@ -91,13 +87,10 @@ routes.get("/", function(req, res){
                                     break;
                                 }
                             }
-                       // }
                         break;
                     case 2:
                         for(var i = 0; i < items.length; i++){
                             if(price[i] >= post.price ){
-                                // price.splice(i, 0, post.price);
-                                // items.splice(i, 0, post);
                                 break;
                             }
                         }
@@ -106,7 +99,6 @@ routes.get("/", function(req, res){
 
                         break;    
                     case 3:
-                    //    if ( post.price > 0){
                             for(var i = 0; i <= items.length; i++){
                                 if(price[i] <= post.price){
                                     price.splice(i, 0, post.price);
@@ -115,13 +107,10 @@ routes.get("/", function(req, res){
                                 }
                                 
                             }
-                 //       }
                         break;
                     case 4:
                         for(var i = 0; i < items.length; i++){
                             if(bids[i] >= post.comments.length ){
-                                // price.splice(i, 0, post.price);
-                                // items.splice(i, 0, post);
                                 break;
                             }
                         }
@@ -130,7 +119,6 @@ routes.get("/", function(req, res){
 
                         break;    
                     case 5:
-                       // if ( post.comments.length >= 0){
                             for(var i = 0; i <= items.length; i++){
                                 console.log(bids[i] + '' + post.comments.length);
                                 if(bids[i] <= post.comments.length){
@@ -140,7 +128,6 @@ routes.get("/", function(req, res){
                                 }
                                 
                             }
-                      //  }
                         break;
                     default:
                         items.push(post);
@@ -148,7 +135,6 @@ routes.get("/", function(req, res){
                 
             });
             res.render("offers/offers", {posts: items, page: page, params: params});
-            //}
         }
     });
 });
