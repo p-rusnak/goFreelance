@@ -2,11 +2,14 @@
 
 
 <div class="container main">
-    <h1> REGISTER !</h1>
     
     <form action="/register" method="POST">
-        <input type="text" name="username" placeholder="Username" required pattern=".{5, 17}" title="User name should be between 5 and 17 characters">
-        <input type="password" name="password" placeholder="Password" required pattern=".{5, 17}" title="User name should be between 5 and 17 characters"> 
+    <h1> REGISTER !</h1>
+        Username: <input type="text" name="username" placeholder="Username" required pattern=".{5, 17}" title="User name should be between 5 and 17 characters"><br>
+        Password:  <input type="password" name="password" placeholder="Password" required pattern=".{5, 17}" title="User name should be between 5 and 17 characters"><br>
+        E-Mail: <input type="email" name="email" placeholder="Your e-mail" required><br>
+          <input type="radio" name="type" value="1"> Employer
+          <input type="radio" name="type" value="2"> Employee<br>
         <button class="btn">Submit</button>
     </form>
 </div>

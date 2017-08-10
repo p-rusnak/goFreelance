@@ -5,6 +5,7 @@ var express = require("express"),
 var User    = require("../models/user");
     
 routes.get("/", function(req, res){
+    console.log("visit");
    res.render("home"); 
 });
 
