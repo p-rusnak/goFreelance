@@ -1,13 +1,13 @@
-var express       = require("express"),
-    mongoose      = require("mongoose"),
-    bodyParser    = require("body-parser"),
-    passport      = require("passport"),
+var express        = require("express"),
+    mongoose       = require("mongoose"),
+    bodyParser     = require("body-parser"),
+    passport       = require("passport"),
     methodOverride = require("method-override"),
-    LocalStrategy = require("passport-local");
-var User          = require("./models/user");
-var commentRoutes = require("./routes/comments"),
-    offerRoutes   = require("./routes/offers"),
-    indexRoutes   = require("./routes/index");
+    LocalStrategy  = require("passport-local");
+var User           = require("./models/user");
+var commentRoutes  = require("./routes/comments"),
+    offerRoutes    = require("./routes/offers"),
+    indexRoutes    = require("./routes/index");
     
 var routes = express();
 // var clearDB  = require("./dbErase");
