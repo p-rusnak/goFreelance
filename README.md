@@ -14,7 +14,7 @@ Simple website like freelance.com with offers from scratch
 
 # bugs and things that need change:
 - ~~cant reach eddit form for few projects~~
-- username is case-sensitive
+- ~~username is case-sensitive~~
 
 # style all the pages! (remove bootstrap too)
 
