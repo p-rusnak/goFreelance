@@ -1,6 +1,6 @@
 # goFreelance
 Simple website like freelance.com with offers from scratch
-: https://go-freelance-snaki00.c9users.io : sometimes hosted here
+: https://go-freelance-p-rusnak.c9users.io : sometimes hosted here
 
 # to do
 > - include react
